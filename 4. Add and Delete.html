@@ -1,0 +1,38 @@
+<html>
+<head>
+    <title>Lab: DOM and Events - Add and Delete</title>
+</head>
+<body>
+<h1>List of Items</h1>
+<ul id="items">
+    <li id="li0">first item <a href="#" onclick="delItem(0)">[Delete]</a></li>
+    <li id="li1">second item <a href="#" onclick="delItem(1)">[Delete]</a></li>
+    <li id="li2">third item <a href="#" onclick="delItem(2)">[Delete]</a></li>
+</ul>
+
+<input type="text" id="newText" />
+<input type="button" value="Add" onclick="addItem()" />
+
+<script>
+    var count=document.getElementById('items').getElementsByTagName('li').length;
+
+    function addItem() {
+        let newLineHTML=document.getElementById('newText').value
+            +' <a href=\"#\" onclick=\"delItem('+count+')\">[Delete]</a>';
+        let newLi = document.createElement('li');
+
+        newLi.setAttribute('id', 'li'+count);
+        newLi.innerHTML=newLineHTML;
+
+        document.getElementById('items').appendChild(newLi);
+
+        console.log(count);
+        count++; // increments the id number, to make it uniq
+    }
+    function delItem(id) {
+        document.getElementById('li'+id).remove();
+    }
+</script>
+      
+</body>
+</html>

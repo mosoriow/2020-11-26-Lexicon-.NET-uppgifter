@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title>Lab: DOM and Events - Stopwatch</title>
+</head>
+<body>
+    <div id="time" style="border:3px solid blue; text-align:center; font-size:2em; margin-bottom:10px">00:00</div>
+    <button id="startBtn" onclick="startwatch()">Start</button>
+    <button id="stopBtn" disabled="true" onclick="stopwatch()">Stop</button>
+    <script>
+        window.onload = function() { stopwatch(); }
+
+        var sec=0;
+        var min=0;
+        var watchID;
+
+        function runWatch() {
+            let count='';
+
+            sec++;
+            if(sec==60) {
+                sec=0;
+                min++;
+                if(min==60)
+                    min++;
+            }
+            if(min<10) count='0';
+            count=count+min.toString()+':';
+            if(sec<10) count=count+'0';
+            cont=count+sec.toString();
+            document.getElementById('time').innerHTML=cont;
+        }
+
+        function startwatch() {
+            document.getElementById('startBtn').disabled=true;
+            document.getElementById('stopBtn').disabled=false;
+            watchID=setInterval(runWatch,1000);
+        }
+        function stopwatch() {
+            document.getElementById('startBtn').disabled=false;
+            document.getElementById('stopBtn').disabled=true;
+            clearInterval(watchID);
+        }
+    </script>    
+</body>
+</html>
